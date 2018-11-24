@@ -84,22 +84,44 @@
                     <div class="col-md-4 py-4">
                         <ul class="list-group">
                             <li class="list-group-item">
-                            <a href="{{ route('home') }}">Home</a>
+                                <a href="{{ route('home') }}">
+                                    <i class="fas fa-home"></i> Home
+                                </a>
                             </li>
                             <li class="list-group-item">
-                                <a href="{{ route('categories') }}">Categories</a>
-                            </li>   
+                                <a href="{{ route('categories') }}">
+                                    <i class="fas fa-layer-group"></i> Categories
+                                </a>
+                            </li>  
                             <li class="list-group-item">
-                                <a href="{{ route('category.create') }}">Create new category</a>
+                                <a href="{{ route('posts') }}">
+                                    <i class="fas fa-pencil-alt"></i> Posts
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ route('tags') }}">
+                                    <i class="fas fa-tags"></i> Tags
+                                </a>
                             </li>     
                             <li class="list-group-item">
-                                <a href="{{ route('post.create') }}">Create new post</a>
+                                <a href="{{ route('post.trashed') }}">
+                                    <i class="fas fa-trash-alt"></i> Trashed Posts
+                                </a>
+                            </li>                       
+                            <li class="list-group-item">
+                                <a href="{{ route('category.create') }}">
+                                    <i class="fas fa-folder-plus"></i> Create new category
+                                </a>
+                            </li>     
+                            <li class="list-group-item">
+                                <a href="{{ route('post.create') }}">
+                                    <i class="fas fa-file-signature"></i> Create new post
+                                </a>
                             </li>
                             <li class="list-group-item">
-                                <a href="{{ route('posts') }}">All posts</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="{{ route('post.trashed') }}">All trashed posts</a>
+                                <a href="{{ route('tag.create') }}">
+                                    <i class="fas fa-user-tag"></i> Create new tags
+                                </a>
                             </li>
                         </ul>
                     </div>

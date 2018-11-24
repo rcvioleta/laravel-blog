@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card">
-        <div class="card-header">Create new post</div>
+        <div class="card-header"><i class="fas fa-file-signature"></i> Create new post</div>
         <div class="card-body">
         <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -35,6 +35,15 @@
                             <option value="{{ $category->id }}">{{ $category->name }}</option>   
                         @endforeach
                     </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="tag">Select tags</label>  
+                    @foreach ($tags->all() as $tag)
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="tags[]" value="{{ $tag->id }}"> {{ $tag->tag }}</label>
+                        </div>    
+                    @endforeach
                 </div>
 
                 <div class="form-group">

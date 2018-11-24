@@ -1,10 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    {{-- @include('admin.includes.message') --}}
-
     <div class="card">
-        <div class="card-header">Create a new category</div>
+        <div class="card-header"><i class="fas fa-folder-plus"></i> Create a new category</div>
         
         <div class="card-body">
             <form action="{{ route('category.store') }}" method="POST">

@@ -6,6 +6,8 @@ use App\Post;
 
 use App\Category;
 
+use App\Tag;
+
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -18,7 +20,6 @@ class PostController extends Controller
     public function index()
     {
         return view('admin.posts.index')->with('posts', Post::all());
-        // added comment
     }
 
     /**
@@ -36,7 +37,7 @@ class PostController extends Controller
             return redirect()->route('category.create')->with('info', $message);
         }
 
-        return view('admin.posts.create')->with('categories', $categories);
+        return view('admin.posts.create')->with('categories', $categories)->with('tags', Tag::all());
     }
 
     /**
@@ -51,7 +52,8 @@ class PostController extends Controller
             'title' => 'required|max:255',
             'featured' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'content' => 'required',
-            'category_id' => 'required'
+            'category_id' => 'required',
+            'tags' => 'required'
         ]);
 
         $featured = $request->featured;
@@ -65,6 +67,8 @@ class PostController extends Controller
             'category_id' => $request->category_id,
             'slug' => str_slug($request->title)
         ]);
+
+        $post->tags()->attach($request->tags);
 
         return redirect()->route('post.create')->with('message', 'New post was added');
     }
@@ -89,7 +93,6 @@ class PostController extends Controller
     public function edit($id)
     {
         return view('admin.posts.edit')->with('post', Post::find($id))->with('categories', Category::all());
-        return dd(Post::find($id));
     }
 
     /**
