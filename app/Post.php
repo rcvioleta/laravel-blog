@@ -13,6 +13,7 @@ class Post extends Model
 
     protected $dates = ['deleted_at'];
 
+    // this will allow you use <img src="{{ $post->featured }}">
     public function getFeaturedAttribute($featured)
     {   
         return asset($featured);

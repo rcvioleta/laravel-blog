@@ -92,7 +92,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.posts.edit')->with('post', Post::find($id))->with('categories', Category::all());
+        return view('admin.posts.edit')->with('post', Post::find($id))
+                                       ->with('categories', Category::all())
+                                       ->with('tags', Tag::all());
     }
 
     /**
@@ -130,6 +132,7 @@ class PostController extends Controller
         $post->slug = str_slug($request->title);
 
         $post->save();
+        $post->tags()->sync($request->tags);
 
         return redirect()->route('posts')->with('message', 'Post was updated');
     }

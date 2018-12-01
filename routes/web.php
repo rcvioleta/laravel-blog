@@ -45,4 +45,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::post('/tag/update/{id}', 'TagsController@update')->name('tag.update'); 
     Route::get('/tag/delete/{id}', 'TagsController@destroy')->name('tag.delete'); 
 
+    Route::get('/users', 'UsersController@index')->name('users');
+    Route::get('/user/create', 'UsersController@create')->name('user.create');
+    Route::post('/user/store', 'UsersController@store')->name('user.store');
+    Route::get('/user/edit/{id}', 'UsersController@edit')->name('user.edit');
+    Route::get('/user/trashed/{id}', 'UsersController@trashed')->name('user.trashed');
+
+});
+
+# For testing purposes
+Route::group(['prefix' => 'test'], function() {
+    Route::get('/', 'TestRouteController@index')->name('test.index');
+    Route::post('/store', 'TestRouteController@store')->name('test.store');
 });

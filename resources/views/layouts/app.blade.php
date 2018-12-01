@@ -104,6 +104,11 @@
                                 </a>
                             </li>     
                             <li class="list-group-item">
+                                <a href="{{ route('users') }}">
+                                    <i class="fas fa-users"></i> Users
+                                </a>
+                            </li>   
+                            <li class="list-group-item">
                                 <a href="{{ route('post.trashed') }}">
                                     <i class="fas fa-trash-alt"></i> Trashed Posts
                                 </a>
@@ -121,6 +126,11 @@
                             <li class="list-group-item">
                                 <a href="{{ route('tag.create') }}">
                                     <i class="fas fa-user-tag"></i> Create new tags
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ route('user.create') }}">
+                                    <i class="fas fa-user-plus"></i> Create new users
                                 </a>
                             </li>
                         </ul>
