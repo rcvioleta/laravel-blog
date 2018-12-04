@@ -30,14 +30,22 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $tags = Tag::all();
 
-        if ($categories->count() === 0) 
+        if ($categories->count() === 0)  
         {
-            $message = 'You need to create a category first before creating a post';
+            $message = 'You need to create a category before creating a post';
             return redirect()->route('category.create')->with('info', $message);
         }
 
-        return view('admin.posts.create')->with('categories', $categories)->with('tags', Tag::all());
+
+        if ($tags->count() === 0) 
+        {
+            $message = 'You need to create a tag before creating a post';
+            return redirect()->route('tag.create')->with('info', $message);
+        }
+
+        return view('admin.posts.create')->with('categories', $categories)->with('tags', $tags);
     }
 
     /**

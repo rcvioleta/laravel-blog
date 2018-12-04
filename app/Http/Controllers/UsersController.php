@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +46,8 @@ class UsersController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required | email',
-            'password' => 'required | confirmed'
+            'password' => 'required | confirmed',
+            'password_confirmation' => 'required'
         ]);
 
         $user = User::create([
@@ -51,7 +57,8 @@ class UsersController extends Controller
         ]);
 
         Profile::create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
+            'avatar' => 'uploads/avatars/avatar.png' 
         ]);
 
         return redirect()->back()->with('message', 'New user was added!');
@@ -79,6 +86,36 @@ class UsersController extends Controller
         //
     }
 
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function admin($id)
+    {
+        $user = User::find($id);
+        $user->admin = 1;
+        $user->save();
+        return redirect()->back()->with('message', 'Added admin rights to user');
+    }
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function not_admin($id)
+    {
+        $user = User::find($id);
+        $user->admin = 0;
+        $user->save();
+        return redirect()->back()->with('message', 'Removed admin rights to user');
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -99,6 +136,10 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->profile->delete();
+        $user->delete();
+        
+        return redirect()->back()->with('message', 'User was deleted successfully!');
     }
 }

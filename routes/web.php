@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -48,8 +37,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/users', 'UsersController@index')->name('users');
     Route::get('/user/create', 'UsersController@create')->name('user.create');
     Route::post('/user/store', 'UsersController@store')->name('user.store');
-    Route::get('/user/edit/{id}', 'UsersController@edit')->name('user.edit');
-    Route::get('/user/trashed/{id}', 'UsersController@trashed')->name('user.trashed');
+    Route::get('/user/admin/{id}', 'UsersController@admin')->name('user.admin')->middleware('admin');
+    Route::get('/user/not-admin/{id}', 'UsersController@not_admin')->name('user.not-admin');
+
+    Route::get('/user/profile', 'ProfileController@index')->name('user.profile');
+    Route::post('/user/profile/update', 'ProfileController@update')->name('user.update');
+    Route::get('/user/delete/{id}', 'UsersController@destroy')->name('user.delete');
+
+    Route::get('settings/', 'SettingsController@index')->name('settings');
+    Route::post('settings/update', 'SettingsController@update')->name('settings.update');
 
 });
 

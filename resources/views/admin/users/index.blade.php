@@ -10,7 +10,6 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Permissions</th>
-                    <th>Edit</th>
                     <th>Trash</th>
                 </thead>
                 <tbody>
@@ -22,22 +21,27 @@
                                 <td>{{ $user->email }}</td>
                                 <td>
                                     @if ($user->admin === 1)
-                                        <a href="#" class="btn btn-info">user</a>
+                                        <a href="{{ route('user.not-admin', ['id' => $user->id]) }}" class="btn btn-sm btn-warning">
+                                            remove permissions
+                                        </a>
                                     @else 
-                                        <a href="#" class="btn btn-success">administrator</a>
+                                        <a href="{{ route('user.admin', ['id' => $user->id]) }}" class="btn btn-sm btn-success">
+                                            make admin
+                                        </a>
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('user.edit', [ 'id' => $user->id ]) }}" class="btn btn-lg">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
+                                    @if (Auth::id() !== $user->id)
+                                        <a href="{{ route('user.delete', [ 'id' => $user->id ]) }}" class="btn btn-sm btn-danger">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </a>
+                                    @endif
                                 </td>
-                                <td><a href="{{ route('user.trashed', [ 'id' => $user->id ]) }}" class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                             </tr>   
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="4" class="text-center"><h3>No published post</h3></td>
+                            <td colspan="4" class="text-center"><h3>No users</h3></td>
                         </tr>
                     @endif
                 </tbody>

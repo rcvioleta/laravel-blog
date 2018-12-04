@@ -88,6 +88,28 @@
                                     <i class="fas fa-home"></i> Home
                                 </a>
                             </li>
+                            @if (Auth::user()->admin)
+                                <li class="list-group-item">
+                                    <a href="{{ route('users') }}">
+                                        <i class="fas fa-users"></i> Users
+                                    </a>
+                                </li>   
+                                <li class="list-group-item">
+                                    <a href="{{ route('user.create') }}">
+                                        <i class="fas fa-user-plus"></i> New users
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="{{ route('settings') }}">
+                                        <i class="fas fa-sliders-h"></i> Settings
+                                    </a>
+                                </li>
+                            @endif
+                            <li class="list-group-item">
+                                <a href="{{ route('user.profile') }}">
+                                    <i class="fas fa-user-edit"></i> Edit my profile
+                                </a>
+                            </li>
                             <li class="list-group-item">
                                 <a href="{{ route('categories') }}">
                                     <i class="fas fa-layer-group"></i> Categories
@@ -103,11 +125,6 @@
                                     <i class="fas fa-tags"></i> Tags
                                 </a>
                             </li>     
-                            <li class="list-group-item">
-                                <a href="{{ route('users') }}">
-                                    <i class="fas fa-users"></i> Users
-                                </a>
-                            </li>   
                             <li class="list-group-item">
                                 <a href="{{ route('post.trashed') }}">
                                     <i class="fas fa-trash-alt"></i> Trashed Posts
@@ -126,11 +143,6 @@
                             <li class="list-group-item">
                                 <a href="{{ route('tag.create') }}">
                                     <i class="fas fa-user-tag"></i> Create new tags
-                                </a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="{{ route('user.create') }}">
-                                    <i class="fas fa-user-plus"></i> Create new users
                                 </a>
                             </li>
                         </ul>
